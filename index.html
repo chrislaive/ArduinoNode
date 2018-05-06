@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang = "en" ng-app = "tutorial">
+<head>
+	<meta charset="utf-8">
+	<title>Arduino tutorial</title>
+	<script src="socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script>
+		var app = angular.module('tutorial', []);
+		app.controller('temperatura', ['$scope', ($scope) => {
+			socket.on('lectura',(lectura)=>{
+				$scope.$apply(()=>{
+					$scope.dato = lectura;	
+				})
+			})
+		}])
+		var socket = io();
+	</script>
+</head>
+<body>
+	<div ng-controller = "temperatura">
+		{{dato}}
+	</div>
+</body>
+</html>
+
